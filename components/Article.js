@@ -88,7 +88,7 @@ const data = [
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
-
+console.log('asdf')
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
@@ -114,3 +114,55 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(articleObj){
+  const article = document.createElement('div')
+  const title = document.createElement('h2')
+  const articleParagraph = document.createElement('p')
+  const articleFirstParagraph = document.createElement('p')
+  const articleSecondParagraph = document.createElement('p')
+  const articleThirdParagraph = document.createElement('p')
+  const spanButton = document.createElement('span')
+
+  article.appendChild(title)
+  article.appendChild(articleParagraph)
+  article.appendChild(articleFirstParagraph)
+  article.appendChild(articleSecondParagraph)
+  article.appendChild(articleThirdParagraph)
+  article.appendChild(spanButton)
+
+  article.classList.add('article')
+  articleParagraph.classList.add('date')
+  spanButton.classList.add('expandButton')
+
+  title.textContent = articleObj.title
+  articleParagraph.textContent = articleObj.date
+  articleFirstParagraph.textContent = articleObj.firstParagraph
+  articleSecondParagraph.textContent = articleObj.secondParagraph
+  articleThirdParagraph.textContent = articleObj.thirdParagraph
+  spanButton.innerHTML = '&#9660;'
+
+  spanButton.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+
+    if (Array.from(article.classList).includes('article-open')) {
+      spanButton.innerHTML = '&#9650;'
+    } else {
+      spanButton.innerHTML = '&#9660;'
+    }
+  })
+
+  document.body.appendChild(article)
+
+  console.log(Array.from(article.classList))
+}
+
+data.push({
+  title: 'Samuel L Jackson',
+  date: 'Too many snakes on this plane',
+  firstParagraph: 'My money\'s in that office, right? If she start giving me some bullcrap about it ain\'t there, and we got to go someplace else and get it, I\'m gonna shoot you in the head then and there. Then I\'m gonna shoot that witch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I\'m talking to you, mothertrucker. You listen: we go in there, and that man Winston or anybody else is in there, you the first mothertrucker to get shot. You understand?',
+  secondParagraph: 'Normally, both your basses would be dead as trucking fried chicken, but you happen to pull this crap while I\'m in a transitional period so I don\'t wanna kill you, I wanna help you. But I can\'t give you this case, it don\'t belong to me. Besides, I\'ve already been through too much crap this morning over this case to hand it over to your dumb bass.',
+  thirdParagraph: 'Well, the way they make shows is, they make one show. That show\'s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they\'re going to make more shows. Some pilots get picked and become television programs. Some don\'t, become nothing. She starred in one of the ones that became nothing.'
+})
+
+data.forEach((article) => articleMaker(article))
